@@ -1,22 +1,27 @@
-﻿from flask import Flask, request, render_template_string
+﻿# app.py
+
+from flask import Flask, request, render_template
 
 app = Flask(__name__)
+
+# Bu yerda kasalliklar bazasi bor — oddiy lug‘at (dictionary) ko‘rinishida
+kasallik_bazasi = {
+    "yo'tal": "Sizda nafas yo‘llari infeksiyasi bo‘lishi mumkin. Ko‘proq suv iching va agar yo'tal 3 kundan ortsa, shifokorga murojaat qiling.",
+    "isitma": "Isitma infeksiya belgisi bo‘lishi mumkin. Vrachga boring va tana haroratingizni nazorat qiling.",
+    "bosh og‘rig‘i": "Bosh og‘rig‘i stress, uyqusizlik yoki suvsizlanishdan bo‘lishi mumkin. Agar kuchli bo‘lsa, nevropatologga murojaat qiling."
+}
 
 @app.route("/", methods=["GET", "POST"])
 def index():
     javob = ""
     if request.method == "POST":
-        simptom = request.form["simptom"]
-        javob = f"Siz kiritgan alomat: {simptom}. Bu haqida tez orada tahlil beriladi."
-    return render_template_string("""
-        <h1>AI Doktor Assistent</h1>
-        <form method="post">
-            <label>Alomatingizni kiriting:</label><br>
-            <input type="text" name="simptom" required><br><br>
-            <input type="submit" value="Yuborish">
-        </form>
-        <p>{{ javob }}</p>
-    """, javob=javob)
+        alomat = request.form["alomat"].lower()
+        if alomat in kasallik_bazasi:
+            javob = kasallik_bazasi[alomat]
+        else:
+            javob = "Bu alomat bo‘yicha ma'lumot topilmadi. Iltimos, boshqa so‘z kiriting."
+
+    return render_template("index.html", javob=javob)
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=10000) # Bu yer test uchun ozgina o'zgartirish kiritildi
+    app.run(debug=True)

@@ -19,4 +19,4 @@ def index():
     """, javob=javob)
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=10000)
+    app.run(host="0.0.0.0", port=10000) # Bu yer test uchun ozgina o'zgartirish kiritildi

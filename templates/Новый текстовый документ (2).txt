@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <title>Natija</title>
+</head>
+<body>
+    <h1>Natija:</h1>
+    <p>{{ natija }}</p>
+    <a href="/">Ortga qaytish</a>
+</body>
+</html>

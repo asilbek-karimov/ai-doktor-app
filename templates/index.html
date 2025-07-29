@@ -1,0 +1,20 @@
+﻿<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Doktor Yordamchi</title>
+</head>
+<body>
+    <h2>AI Doktor Yordamchi</h2>
+    <form method="POST" action="/diagnose">
+        <label>Alomatlaringizni kiriting:</label><br>
+        <input type="text" name="symptom" placeholder="Masalan: bosh og'riq, isitma, yo'tal"><br><br>
+        <button type="submit">Tashxislash</button>
+    </form>
+
+    {% if result %}
+        <h3>Natija:</h3>
+        <p>{{ result }}</p>
+    {% endif %}
+</body>
+</html>

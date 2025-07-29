@@ -1,19 +1,22 @@
-﻿print("AI Doktor Assistentga xush kelibsiz!")
+﻿from flask import Flask, request, render_template_string
 
-# Foydalanuvchidan simptomlarni olish
-simptom = input("\nSizda qanday alomatlar bor? (masalan: bosh og'rig'i, isitma, yo'tal): ")
+app = Flask(name)
 
-javob = ""
+@app.route("/", methods=["GET", "POST"])
+def index():
+    javob = ""
+    if request.method == "POST":
+        simptom = request.form["simptom"]
+        javob = f"Siz kiritgan alomat: {simptom}. Bu haqida tez orada tahlil beriladi."
+    return render_template_string("""
+        <h1>AI Doktor Assistent</h1>
+        <form method="post">
+            <label>Alomatingizni kiriting:</label><br>
+            <input type="text" name="simptom" required><br><br>
+            <input type="submit" value="Yuborish">
+        </form>
+        <p>{{ javob }}</p>
+    """, javob=javob)
 
-if "isitma" in simptom.lower():
-    javob += "- Sizda ehtimoliy virusli infeksiya bor. Suv iching va shifokorga murojaat qiling.\n"
-if "yo'tal" in simptom.lower():
-    javob += "- Sizda nafas yo'llari kasalligi bo'lishi mumkin. Iloji bo'lsa, rentgen tekshiruvi qiling.\n"
-if "bosh og'rig'i" in simptom.lower():
-    javob += "- Siz charchagandirsiz yoki stressdasiz. Dam oling, agar davom etsa, shifokorga boring.\n"
-
-if not javob:
-    javob = "Kechirasiz, siz kiritgan alomatlar bo‘yicha maslahat bera olmadim. Iltimos, batafsilroq yozing."
-
-print("\nTavsiyalar:")
-print(javob)
+if name == "main":
+    app.run(host="0.0.0.0", port=10000)

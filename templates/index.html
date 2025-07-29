@@ -1,21 +1,50 @@
-﻿<!-- index.html -->
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
-    <title>AI Doktor</title>
+    <title>AI Doktor Asilbek</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f4f8;
+            padding: 40px;
+            text-align: center;
+        }
+        .container {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            max-width: 600px;
+            margin: auto;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        input[type="text"] {
+            padding: 10px;
+            width: 80%;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+        input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #0077cc;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-    <h1>AI Doktor 🧠</h1>
-    <form method="post">
-        <label>Alomatni kiriting:</label>
-        <input type="text" name="alomat" required>
-        <button type="submit">Yuborish</button>
-    </form>
-
-    {% if javob %}
-        <h3>Javob:</h3>
-        <p>{{ javob }}</p>
-    {% endif %}
+    <div class="container">
+        <h2>AI Doktor Asilbek</h2>
+        <form method="post">
+            <input type="text" name="symptoms" placeholder="Alomatlaringizni kiriting"><br>
+            <input type="submit" value="Tahlil qilish">
+        </form>
+        {% if diagnosis %}
+            <h3>Natija:</h3>
+            <p>{{ diagnosis }}</p>
+        {% endif %}
+    </div>
 </body>
 </html>
